@@ -1,0 +1,27 @@
+{
+  "mappings": {
+    "page": {
+      "properties": {
+        "id_category": {
+          "type": "string",
+          "index": "not_analyzed",
+          "include_in_all": false
+        },
+        "category_key": {
+          "type": "string",
+          "index": "not_analyzed",
+          "include_in_all": false
+        }
+      }
+    },
+    "category": {
+      "properties": {
+        "id_category": {
+          "type": "string",
+          "index": "not_analyzed",
+          "include_in_all": false
+        }
+      }
+    }
+  }
+}
