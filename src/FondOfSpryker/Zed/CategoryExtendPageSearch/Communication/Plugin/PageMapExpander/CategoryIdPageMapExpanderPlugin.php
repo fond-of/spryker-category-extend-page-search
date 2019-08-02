@@ -39,10 +39,8 @@ class CategoryIdPageMapExpanderPlugin extends AbstractPlugin implements Category
      */
     protected function setCategoryId(PageMapTransfer $pageMapTransfer, PageMapBuilderInterface $pageMapBuilder, array $categoryData): void
     {
-        if (isset($cateoryData[self::FK_CATEGORY])) {
-            $pageMapTransfer->setCategoryId($categoryData[self::FK_CATEGORY]);
-
-            $this->setFullTextSearch($pageMapTransfer, $pageMapBuilder, $categoryData);
+        if (array_key_exists(self::FK_CATEGORY, $categoryData)) {
+            $this->addSearchResultDataCategorId($pageMapTransfer, $pageMapBuilder, $categoryData);
         }
     }
 
@@ -53,8 +51,8 @@ class CategoryIdPageMapExpanderPlugin extends AbstractPlugin implements Category
      *
      * @return void
      */
-    protected function setFullTextSearch(PageMapTransfer $pageMapTransfer, PageMapBuilderInterface $pageMapBuilder, array $categoryData): void
+    protected function addSearchResultDataCategorId(PageMapTransfer $pageMapTransfer, PageMapBuilderInterface $pageMapBuilder, array $categoryData): void
     {
-        $pageMapBuilder->addFullText($pageMapTransfer, $categoryData[self::FK_CATEGORY]);
+        $pageMapBuilder->addSearchResultData($pageMapTransfer, self::FK_CATEGORY, $categoryData[self::FK_CATEGORY]);
     }
 }

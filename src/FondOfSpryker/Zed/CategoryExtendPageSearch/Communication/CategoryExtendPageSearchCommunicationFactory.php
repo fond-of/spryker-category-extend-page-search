@@ -2,7 +2,7 @@
 
 namespace FondOfSpryker\Zed\CategoryExtendPageSearch\Communication;
 
-use FondOfSpryker\Zed\CategoryExtendPageSearch\Communication\Plugin\PageMapExpander\CategoryIdPageMapExpanderPlugin;
+use FondOfSpryker\Zed\CategoryExtendPageSearch\CategoryExtendPageSearchDependencyProvider;
 use FondOfSpryker\Zed\CategoryExtendPageSearch\Communication\Plugin\PageMapExpander\CategoryKeyPageMapExpanderPlugin;
 use Spryker\Zed\CategoryPageSearch\Communication\CategoryPageSearchCommunicationFactory as SprykerCategoryPageSearchCommunicationFactory;
 
@@ -13,9 +13,6 @@ class CategoryExtendPageSearchCommunicationFactory extends SprykerCategoryPageSe
      */
     public function getCategoryPageMapExpanderPlugins(): array
     {
-        return [
-            new CategoryIdPageMapExpanderPlugin(),
-            new CategoryKeyPageMapExpanderPlugin(),
-        ];
+        return $this->getProvidedDependency(CategoryExtendPageSearchDependencyProvider::PLUGIN_COLLECTION_CATEGORY_PAGE_MAP_EXPANDER);
     }
 }

@@ -40,10 +40,10 @@ class CategoryKeyPageMapExpanderPlugin extends AbstractPlugin implements Categor
      */
     protected function setCategoryKey(PageMapTransfer $pageMapTransfer, PageMapBuilderInterface $pageMapBuilder, array $categoryData): void
     {
-        if (array_key_exists(self::CATEGORY_KEY, $categoryData)) {
-            $pageMapTransfer->setCategoryKey($categoryData[self::SPY_CATEGORY][self::CATEGORY_KEY]);
-
-            $this->addSearchResultDataCategoryKey($pageMapTransfer, $pageMapBuilder, $categoryData);
+        if (array_key_exists(self::SPY_CATEGORY, $categoryData)) {
+            if (array_key_exists(self::CATEGORY_KEY, $categoryData[self::SPY_CATEGORY])) {
+                $this->addSearchResultDataCategoryKey($pageMapTransfer, $pageMapBuilder, $categoryData);
+            }
         }
     }
 

@@ -2,6 +2,8 @@
 
 namespace FondOfSpryker\Zed\CategoryExtendPageSearch;
 
+use FondOfSpryker\Zed\CategoryExtendPageSearch\Communication\Plugin\PageMapExpander\CategoryIdPageMapExpanderPlugin;
+use FondOfSpryker\Zed\CategoryExtendPageSearch\Communication\Plugin\PageMapExpander\CategoryKeyPageMapExpanderPlugin;
 use Spryker\Zed\CategoryPageSearch\CategoryPageSearchDependencyProvider as SprykerCategoryPageSearchDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
@@ -17,6 +19,10 @@ class CategoryExtendPageSearchDependencyProvider extends SprykerCategoryPageSear
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
         parent::provideCommunicationLayerDependencies($container);
+
+        $container = $this->addCategoryPageMapExpanderPlugin($container);
+
+        return $container;
     }
 
     /**
@@ -24,20 +30,23 @@ class CategoryExtendPageSearchDependencyProvider extends SprykerCategoryPageSear
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    /*protected function addCategoryPageMapExpanderPlugins(Container $container): Container
+    protected function addCategoryPageMapExpanderPlugin(Container $container): Container
     {
-        $container[self::PLUGIN_COLLECTION_CATEGORY_PAGE_MAP_EXPANDER] = function (Container $container) {
-            return $this->getCategoryPageMapExpanderPlugins();
+        $container[static::PLUGIN_COLLECTION_CATEGORY_PAGE_MAP_EXPANDER] = function () {
+            return $this->createCategoryPageMapExpanderPlugin();
         };
 
         return $container;
-    }*/
+    }
 
     /**
-     * @return array
+     * @return \FondOfSpryker\Zed\CategoryExtendPageSearch\Dependency\Plugin\CategoryPageMapExpanderInterface[]
      */
-    /*protected function getCategoryPageMapExpanderPlugins(): array
+    protected function createCategoryPageMapExpanderPlugin(): array
     {
-        return [];
-    }*/
+        return [
+            new CategoryIdPageMapExpanderPlugin(),
+            new CategoryKeyPageMapExpanderPlugin(),
+        ];
+    }
 }
