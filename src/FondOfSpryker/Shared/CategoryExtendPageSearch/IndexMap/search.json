@@ -9,13 +9,6 @@
           "type": "keyword"
         }
       }
-    },
-    "category": {
-      "properties": {
-        "id_category": {
-          "type": "keyword"
-        }
-      }
     }
   }
 }
